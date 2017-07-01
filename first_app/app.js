@@ -1,12 +1,14 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
+var express      = require('express');
+var path         = require('path');
+var favicon      = require('static-favicon');
+var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var bodyParser   = require('body-parser');
+var mysql        = require('mysql');
+var connection   = require('express-myconnection');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var users  = require('./routes/users');
 
 var app = express();
 
@@ -21,8 +23,17 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(connection(mysql, {
+    host:     'localhost',
+    user:     'root',
+    password: '',
+    database: 'demo'
+  },'request')
+);
+
 app.use('/', routes);
-app.use('/users', users);
+app.use('/users', users.list);
+
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
