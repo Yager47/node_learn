@@ -5,7 +5,6 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var mysql        = require('mysql');
-var connection   = require('express-myconnection');
 
 var routes = require('./routes/index');
 var users  = require('./routes/users');
@@ -23,16 +22,8 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(connection(mysql, {
-    host:     'localhost',
-    user:     'root',
-    password: '',
-    database: 'demo'
-  },'request')
-);
-
 app.use('/', routes);
-app.use('/users', users.list);
+app.use('/users', users);
 
 
 /// catch 404 and forwarding to error handler
