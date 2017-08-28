@@ -1,4 +1,5 @@
-import Hapi from 'hapi';
+// import Hapi from 'hapi';
+var Hapi = require('hapi');
 const server = new Hapi.Server();
 
 server.connection({
@@ -10,7 +11,7 @@ server.route({
   path:   '/hello',
   
   handler: (request, reply) => {
-    reply('Hello bitch!');
+    reply('Hello.');
   }
 });
 

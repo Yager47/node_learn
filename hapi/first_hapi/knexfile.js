@@ -2,17 +2,21 @@
 
 module.exports = {
 
-  development: {
-    migrations: { tableName: 'knex_migrations' },
-    seeds: { tablename: './seeds' },
-    client: 'mysql',
+    development: {
 
-    connection: {
-      host:     'localhost',
-      user:     'yager',
-      password: 'password',
-      database: 'first_hapi_db',
-      charset:  'utf8'
+        migrations: { tableName: 'knex_migrations' },
+        seeds: { tableName: './seeds' },
+
+        client: 'mysql',
+        connection: {
+
+            host: '192.168.33.10',
+
+            user: 'birdbase',
+            password: 'password',
+
+            database: 'birdbase',
+            charset: 'utf8'
+        }
     }
-  }
 };
